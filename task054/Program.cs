@@ -33,7 +33,7 @@ void PrintMatrix(int[,] matrix)
         {
             Console.Write(matrix[i, j] + " ");
         }
-        Console.WriteLine( );
+        Console.WriteLine();
     }
 }
 
@@ -41,42 +41,22 @@ void SortInDescendingOrderByRow(int[,] matrix)
 {
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int k = 0; k < (matrix.GetLength(0)); k++)
         {
-            int max = matrix[i, 0];
-            if (max < matrix [i,j])
+            for (int j = 0; j < (matrix.GetLength(1)); j++)
             {
-              matrix [i,j] = max;
-            }
-            
-        }
-    }
-}
+                for (int l = 0; l < (matrix.GetLength(1) - 1); l++)
+                {
+                    if (matrix[(k), (l + 1)] > matrix[k, l])
+                    {
+                        int temp = matrix[k, l];
+                        matrix[k, l] = matrix[(k), (l + 1)];
+                        matrix[(k), (l + 1)] = temp;
+                    }
 
-int[,] Sort(int[,] matrix)
-{
-    int[,] newMatrix = new int[matrix.GetLength(0), matrix.GetLength(1)];
-    for (int i = 0; i < newMatrix.GetLength(0); i++)
-    {
-        for (int j = 0; j < newMatrix.GetLength(1); j++)
-        {
-             int max = matrix[0, 0];
-            if (max > matrix [i,j])
-            {
-              newMatrix[i,j] = matrix[i,j];
+                }
             }
         }
-    }
-return newMatrix;
-}
-
-void SwapFirstAndLastRows(int[,] matrix)
-{
-    for (int j = 0; j < matrix.GetLength(1); j++)
-    {
-            int temp = matrix[0, j];
-            matrix[0, j] = matrix[(matrix.GetLength(0) - 1),(j)];
-            matrix[(matrix.GetLength(0) - 1),(j)] = temp;
     }
 }
 
@@ -88,6 +68,6 @@ int n = Convert.ToInt32(Console.ReadLine());
 
 int[,] matrix = FillMatrix(m, n);
 PrintMatrix(matrix);
-Console.WriteLine( );
-int[,] tmatrix = Sort(matrix);
-PrintMatrix(tmatrix);
+Console.WriteLine();
+SortInDescendingOrderByRow(matrix);
+PrintMatrix(matrix);
